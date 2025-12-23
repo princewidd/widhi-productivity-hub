@@ -1,0 +1,33 @@
+{
+  "name": "Widhi Productivity Hub",
+  "short_name": "Widhi Hub",
+  "description": "Your all-in-one productivity companion for tasks, schedules, budget, and notes",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#1e293b",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "education", "finance", "utilities"],
+  "lang": "id",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/Widhi.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/Widhi.jpg", 
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/Widhi.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ]
+}

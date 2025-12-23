@@ -1,0 +1,1278 @@
+/* Reset sederhana */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #e5e7eb;
+    padding: 32px 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(15, 23, 42, 0.95);
+    border-radius: 16px;
+    padding: 24px 20px 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.profil {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.foto-profil {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #38bdf8;
+    margin-bottom: 10px;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.7);
+}
+
+h1 {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    text-align: center;
+    color: #f9fafb;
+}
+
+.profil-subtitle {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 12px;
+}
+
+/* Data Management Buttons */
+.data-management {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.data-btn {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+}
+
+.export-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #022c22;
+}
+
+.import-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #1e3a8a;
+}
+
+.install-pwa-btn {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    color: #3c1361;
+}
+
+.data-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.05);
+}
+
+.data-btn:active {
+    transform: translateY(0);
+}
+
+/* PWA Install Prompt */
+.install-prompt {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.05));
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+    text-align: center;
+    display: none;
+}
+
+.install-prompt.show {
+    display: block;
+}
+
+.install-btn {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-top: 8px;
+}
+
+.install-btn:hover {
+    filter: brightness(1.1);
+}
+
+/* Tab Navigation */
+.tab-navigation {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+    border-bottom: 1px solid #374151;
+    padding-bottom: 12px;
+}
+
+.tab-btn {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(148,163,184,0.1);
+    color: #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: #0ea5e9;
+    color: #022c3a;
+    border-color: #0ea5e9;
+    font-weight: 600;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Jadwal specific styles */
+#formulir-jadwal {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px 16px;
+    margin-bottom: 16px;
+}
+
+#formulir-jadwal div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#formulir-jadwal select,
+#formulir-jadwal input[type="time"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+#formulir-jadwal select:focus,
+#formulir-jadwal input[type="time"]:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 1px #38bdf8;
+}
+
+#formulir-jadwal button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: #022c3a;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+/* Budget Tracker Styles */
+#formulir-budget {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px 16px;
+    margin-bottom: 16px;
+}
+
+#formulir-budget div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#formulir-budget input[type="number"],
+#formulir-budget input[type="date"],
+#formulir-budget input[type="text"],
+#formulir-budget select {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+#formulir-budget input:focus,
+#formulir-budget select:focus {
+    outline: none;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 1px #f59e0b;
+}
+
+.category-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.category-row select {
+    flex: 1;
+}
+
+.category-row input {
+    flex: 1;
+    min-width: 150px;
+}
+
+#formulir-budget button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #451a03;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+#formulir-budget button[type="submit"]:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 8px 18px rgba(245, 158, 11, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Budget Controls */
+.budget-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.budget-controls .filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 150px;
+}
+
+.budget-controls select {
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.85rem;
+}
+
+/* Budget Summary */
+.budget-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.summary-card {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+}
+
+.summary-card h4 {
+    font-size: 0.8rem;
+    color: #fbbf24;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.summary-amount,
+.summary-category,
+.summary-average {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f9fafb;
+}
+
+/* Category Filters */
+.category-filters {
+    margin-bottom: 16px;
+}
+
+.category-filters h4 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+}
+
+#category-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.category-filter-btn {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.1);
+    color: #fbbf24;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.category-filter-btn:hover {
+    background: rgba(245, 158, 11, 0.2);
+    transform: translateY(-1px);
+}
+
+.category-filter-btn.active {
+    background: #f59e0b;
+    color: #451a03;
+    font-weight: 600;
+}
+
+/* Expense List */
+.expense-list-container h4 {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #e5e7eb;
+}
+
+#daftar-pengeluaran {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#daftar-pengeluaran li {
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    border-left: 4px solid #f59e0b;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+#daftar-pengeluaran .expense-info {
+    flex: 1;
+}
+
+#daftar-pengeluaran .expense-title {
+    font-weight: 600;
+    color: #f9fafb;
+    margin-bottom: 2px;
+}
+
+#daftar-pengeluaran .expense-details {
+    font-size: 0.8rem;
+    color: #cbd5e1;
+}
+
+#daftar-pengeluaran .expense-amount {
+    font-weight: 700;
+    color: #fbbf24;
+    font-size: 1rem;
+}
+
+#daftar-pengeluaran button {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #ef4444;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.1s ease;
+}
+
+#daftar-pengeluaran button:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+}
+
+/* Quote Widget */
+.quote-widget {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(160, 82, 45, 0.05));
+    border: 1px solid rgba(139, 69, 19, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.quote-widget::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 4rem;
+    color: rgba(139, 69, 19, 0.1);
+    font-family: serif;
+}
+
+.quote-content {
+    flex: 1;
+}
+
+.quote-text {
+    font-style: italic;
+    color: #f1f5f9;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+}
+
+.quote-author {
+    color: #cbd5e1;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.quote-refresh {
+    background: rgba(139, 69, 19, 0.2);
+    border: 1px solid rgba(139, 69, 19, 0.3);
+    color: #d2b48c;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote-refresh:hover {
+    background: rgba(139, 69, 19, 0.3);
+    transform: rotate(180deg);
+}
+
+/* Notes Styles */
+#formulir-notes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 16px;
+    margin-bottom: 16px;
+}
+
+#formulir-notes .note-content-field {
+    grid-column: 1 / -1;
+}
+
+#formulir-notes div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#formulir-notes textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 80px;
+}
+
+#formulir-notes textarea:focus {
+    outline: none;
+    border-color: #8b4513;
+    box-shadow: 0 0 0 1px #8b4513;
+}
+
+#formulir-notes button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #8b4513, #a0522d);
+    color: #fdf6e3;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+#formulir-notes button[type="submit"]:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 8px 18px rgba(139, 69, 19, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Notes Controls */
+.notes-controls {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.notes-controls .filter-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 150px;
+}
+
+.notes-controls input[type="text"] {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+.notes-controls input[type="text"]:focus {
+    outline: none;
+    border-color: #8b4513;
+    box-shadow: 0 0 0 1px #8b4513;
+}
+
+/* Notes Grid */
+.notes-list-container h4 {
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    color: #e5e7eb;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.note-card {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.08), rgba(160, 82, 45, 0.04));
+    border: 1px solid rgba(139, 69, 19, 0.15);
+    border-left: 4px solid #8b4513;
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.note-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.note-title {
+    font-weight: 600;
+    color: #f9fafb;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.note-category {
+    font-size: 0.75rem;
+    color: #d2b48c;
+    background: rgba(139, 69, 19, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.note-content {
+    color: #cbd5e1;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+
+.note-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+.note-date {
+    font-size: 0.7rem;
+    color: #9ca3af;
+}
+
+.note-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.note-actions button {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+.edit-note-btn {
+    background: #0ea5e9;
+    color: #022c3a;
+}
+
+.delete-note-btn {
+    background: #ef4444;
+    color: white;
+}
+
+.note-actions button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+}
+
+@media (max-width: 600px) {
+    .notes-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #formulir-notes {
+        grid-template-columns: 1fr;
+    }
+    
+    .notes-controls {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .quote-widget {
+        padding: 12px;
+    }
+    
+    .quote-text {
+        font-size: 0.85rem;
+    }
+}
+
+
+.btn-cta { display:block; width:100%; padding: 12px; border-radius: 999px; border: none; background: linear-gradient(90deg,#34d399,#10b981); color: #052e16; font-weight: 700; font-size: 1rem; cursor: pointer; margin-top: 8px; }
+.btn-cta.small { padding: 10px; font-size: 0.95rem; }
+
+.bottom-tabs { display:flex; gap:8px; margin-top: 10px; justify-content: center; }
+.tab-btn { background: rgba(255,255,255,0.03); border:1px solid rgba(148,163,184,0.06); color:#e5e7eb; padding:8px 14px; border-radius:999px; cursor:pointer; }
+.tab-btn.active { background:#0ea5e9; color:#022c3a; }
+
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px 16px;
+    margin-bottom: 16px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+label {
+    font-size: 0.85rem;
+    color: #cbd5f5;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 1px #38bdf8;
+}
+
+button[type="submit"] {
+    grid-column: 1 / -1;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: none;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #052e16;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+}
+
+button[type="submit"]:hover {
+    filter: brightness(1.05);
+    box-shadow: 0 8px 18px rgba(22, 163, 74, 0.4);
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #374151;
+    margin: 14px 0;
+}
+
+/* Filter matkul */
+.filter-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+#filter-matkul {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #4b5563;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.9rem;
+    appearance: none;
+}
+
+#filter-matkul:focus {
+    outline: none;
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 1px #38bdf8;
+}
+
+/* Daftar tugas */
+#daftar-tugas {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+#daftar-tugas li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: #020617;
+    border: 1px solid #1f2933;
+}
+
+#daftar-tugas li span {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+#daftar-tugas input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+#daftar-tugas button {
+    border: none;
+    border-radius: 999px;
+    padding: 4px 9px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: background 0.1s ease, transform 0.1s ease;
+}
+
+#daftar-tugas button:nth-of-type(1) {
+    /* Edit */
+    background: #0ea5e9;
+    color: #03253a;
+}
+
+#daftar-tugas button:nth-of-type(2) {
+    /* Hapus */
+    background: #f97373;
+    color: #450a0a;
+}
+
+#daftar-tugas button:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.05);
+}
+
+#daftar-tugas button:active {
+    transform: translateY(0);
+    filter: none;
+}
+
+.arsip-section {
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px dashed #4b5563;
+}
+
+.arsip-section h2 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #e5e7eb;
+}
+
+.arsip-subtitle {
+    font-size: 0.8rem;
+    color: #9ca3af;
+    margin-bottom: 6px;
+}
+
+#arsip-file {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#arsip-file li {
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #020617;
+    border: 1px solid #374151;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#arsip-file a {
+    color: #38bdf8;
+    text-decoration: underline;
+    font-size: 0.8rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 18px 14px 22px;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Revert to single column layout */
+/* removed two-column grid — keep styling minimal for single-column */
+
+@media (max-width: 700px) {
+    /* responsive adjustments kept */
+}
+
+
+
+/* Jadwal (weekly view) */
+.jadwal-section {
+    margin-top: 18px;
+}
+
+#weekly-view {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.week-col {
+    background: #071032;
+    border: 1px solid #172554;
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 140px;
+    flex-shrink: 0;
+    min-height: 120px;
+}
+
+.week-col h4 {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: #c7d2fe;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(199, 210, 254, 0.2);
+    padding-bottom: 4px;
+}
+
+.week-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.week-list li {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    position: relative;
+    border-left: 3px solid rgba(56, 189, 248, 0.6);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.week-list li:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.week-list li button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.week-list li button:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* --- Jadwal: distinct styling --- */
+.jadwal-section h2,
+.jadwal-section h3 {
+    color: #7dd3fc;
+    font-weight: 700;
+}
+
+.week-col:nth-child(1) h4 { color: #60a5fa; }
+.week-col:nth-child(2) h4 { color: #06b6d4; }
+.week-col:nth-child(3) h4 { color: #34d399; }
+.week-col:nth-child(4) h4 { color: #f59e0b; }
+.week-col:nth-child(5) h4 { color: #f97316; }
+.week-col:nth-child(6) h4 { color: #ef4444; }
+.week-col:nth-child(7) h4 { color: #a78bfa; }
+
+.week-list li {
+    position: relative;
+    padding-left: 12px;
+    border-left: 4px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.week-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(2,6,23,0.6);
+}
+
+/* emoji/icon per kolom */
+.week-col:nth-child(1) .week-list li::before { content: "🌤"; }
+.week-col:nth-child(2) .week-list li::before { content: "📘"; }
+.week-col:nth-child(3) .week-list li::before { content: "🧪"; }
+.week-col:nth-child(4) .week-list li::before { content: "🧑‍🏫"; }
+.week-col:nth-child(5) .week-list li::before { content: "🧾"; }
+.week-col:nth-child(6) .week-list li::before { content: "🏫"; }
+.week-col:nth-child(7) .week-list li::before { content: "🕰"; }
+
+.week-list li::before {
+    display: inline-block;
+    width: 22px;
+    margin-right: 8px;
+    font-size: 0.95rem;
+}
+
+/* --- Budget: distinct styling --- */
+.budget-section {
+    border-left: 5px solid rgba(245,158,11,0.95);
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.85), rgba(3,7,18,0.5));
+    padding: 14px;
+}
+
+/* Expense: neat single-row layout (narrower) */
+#expense-form {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 0.9fr 0.8fr;
+    gap: 10px;
+    align-items: start;
+    margin: 8px auto 16px auto;
+    max-width: 620px; /* batasi lebar form supaya tidak terlalu melebar */
+}
+
+#expense-form div { display:flex; flex-direction:column; }
+
+#expense-form label { font-size: 0.85rem; color: #cbd5f5; margin-bottom:8px; }
+
+#expense-form input[type="text"],
+#expense-form input[type="number"],
+#expense-form input[type="date"],
+#expense-form select {
+    height: 44px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+    background: #020617;
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Category row: horizontal, tidy */
+.category-row { display:flex; gap:8px; align-items:center; }
+.category-row input {
+    flex: 1;
+    height:44px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #374151;
+    background: #020617;
+    color: #e5e7eb;
+}
+#add-category-btn {
+    height:36px;
+    padding: 0 12px;
+    border-radius: 8px;
+    border: none;
+    background: #0ea5e9;
+    color: #04202b;
+    cursor: pointer;
+    align-self: center;
+}
+#add-category-btn:hover { filter: brightness(1.03); }
+
+/* Note field placed below and spans full width */
+#expense-form div:nth-child(5) { grid-column: 1 / -1; margin-top: 8px; }
+
+/* Submit button: full-width green */
+.btn-cta.small { grid-column: 1 / -1; padding: 12px; border-radius: 999px; background: linear-gradient(135deg,#22c55e,#16a34a); color:#052e16; font-weight:700; width:100%; justify-self: stretch; }
+
+@media (max-width: 900px) {
+    #expense-form { grid-template-columns: repeat(2, 1fr); }
+    .category-row { gap:6px; }
+}
+
+@media (max-width: 480px) {
+    #expense-form { grid-template-columns: 1fr; }
+    #expense-form div:nth-child(5) { grid-column: 1 / -1; }
+    .category-row { flex-direction: row; }
+}
+
+/* Make amount and date more readable */
+#exp-amount { min-width: 120px; }
+#exp-date { min-width: 140px; }
+
+#expense-summary {
+    background: linear-gradient(90deg, rgba(16,185,129,0.08), rgba(34,197,94,0.03));
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(34,197,94,0.12);
+    margin-bottom: 8px;
+    display: inline-block;
+}
+
+#category-list button {
+    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid rgba(148,163,184,0.08);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+#category-list button:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(2,6,23,0.6); }
+
+/* --- Tasks (contrast from Jadwal) --- */
+#daftar-tugas li {
+    background: rgba(255,255,255,0.02);
+    border-left: 4px solid rgba(100,116,139,0.12);
+}
+
+#daftar-tugas li span {
+    font-weight: 600;
+    color: #e6edf3;
+}
+
+#daftar-tugas button {
+    opacity: 0.95;
+}
+
+/* subtle transitions */
+input, select, button {
+    transition: box-shadow 0.12s ease, transform 0.08s ease;
+}
+
+/* Budget responsive tweak */
+@media (max-width: 600px) {
+    .budget-section { padding: 10px; }
+}
+
+/* Budget */
+.budget-section {
+    margin-top: 18px;
+    padding: 10px;
+    border: 1px solid #1f2937;
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(3,7,18,0.6), rgba(6,12,22,0.6));
+}
+
+#category-list {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#category-list button {
+    padding: 6px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(148,163,184,0.12);
+    background: rgba(255,255,255,0.03);
+    color: #e2e8f0;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+#expense-list {
+    list-style: none;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#expense-list li {
+    background: #020617;
+    border: 1px solid #273549;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+#expense-list li button {
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #ef4444;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+#expense-summary {
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #f1f5f9;
+}
+
+@media (max-width: 900px) {
+    #weekly-view { 
+        gap: 6px;
+    }
+    
+    .week-col {
+        min-width: 120px;
+        padding: 8px;
+    }
+    
+    .week-col h4 {
+        font-size: 0.8rem;
+    }
+    
+    .week-list li {
+        font-size: 0.7rem;
+        padding: 6px;
+    }
+}
+
+@media (max-width: 600px) {
+    #weekly-view { 
+        gap: 4px;
+    }
+    
+    .week-col { 
+        min-width: 100px;
+        min-height: 100px;
+        padding: 6px;
+    }
+    
+    .week-col h4 {
+        font-size: 0.75rem;
+        margin-bottom: 6px;
+    }
+    
+    .week-list li {
+        font-size: 0.65rem;
+        padding: 5px;
+    }
+}
+
+

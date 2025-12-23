@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widhi Productivity Hub</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Organize your academic life">
+    <meta name="theme-color" content="#1e293b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Widhi Hub">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Icons -->
+    <link rel="icon" type="image/jpeg" href="/Icon APK.jpg">
+    <link rel="apple-touch-icon" href="/Icon APK.jpg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <section class="profil">
+            <img src="Widhi.jpg" alt="Foto Widhi Saputra" class="foto-profil">
+            <h1>Widhi Workspaces</h1>
+            <p class="profil-subtitle">Organize your academic life</p>
+            
+            <!-- Data Management Buttons -->
+            <div class="data-management">
+                <button id="install-pwa-btn" class="data-btn install-pwa-btn" title="Install sebagai aplikasi" style="display: none;">
+                    � InstallD App
+                </button>
+                <button id="export-data-btn" class="data-btn export-btn" title="Export semua data">
+                    � Export Dataa
+                </button>
+                <button id="import-data-btn" class="data-btn import-btn" title="Import data dari file">
+                    📥 Import Data
+                </button>
+                <input type="file" id="import-file-input" accept=".json" style="display: none;">
+            </div>
+        </section>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="tugas">📝 Tugas</button>
+            <button class="tab-btn" data-tab="jadwal">📅 Jadwal Kuliah</button>
+            <button class="tab-btn" data-tab="budget">💰 Budget Tracker</button>
+            <button class="tab-btn" data-tab="notes">📝 Notes</button>
+        </div>
+
+        <!-- Daily Quote Widget -->
+        <div class="quote-widget">
+            <div class="quote-content">
+                <div class="quote-text" id="daily-quote">Memuat kutipan inspiratif...</div>
+                <div class="quote-author" id="quote-author">- Memuat...</div>
+            </div>
+            <button class="quote-refresh" id="refresh-quote" title="Get new quote">🔄</button>
+        </div>
+
+        <!-- Tab Content: Tugas -->
+        <div id="tab-tugas" class="tab-content active">
+            <!-- Form Input -->
+            <form id="formulir-tugas">
+                <div>
+                    <label for="judul">Judul Tugas</label><br>
+                    <input type="text" id="judul" name="judul" required autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="matkul">Mata Kuliah</label><br>
+                    <input type="text" id="matkul" name="matkul" required autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="deadline">Deadline</label><br>
+                    <input type="date" id="deadline" name="deadline" required autocomplete="off">
+                </div>
+
+                <button type="submit">Tambah Tugas</button>
+            </form>
+
+            <hr>
+
+            <!-- Filter Matkul -->
+            <div class="filter-row">
+                <label for="filter-matkul">Filter mata kuliah:</label>
+                <select id="filter-matkul">
+                    <option value="all">Semua</option>
+                </select>
+            </div>
+
+            <!-- Container Daftar Tugas -->
+            <ul id="daftar-tugas">
+                <!-- List tugas akan muncul di sini -->
+            </ul>
+        </div>
+
+        <!-- Tab Content: Jadwal -->
+        <div id="tab-jadwal" class="tab-content">
+            <!-- Form Input Jadwal -->
+            <form id="formulir-jadwal">
+                <div>
+                    <label for="jadwal-matkul">Mata Kuliah</label><br>
+                    <input type="text" id="jadwal-matkul" name="jadwal-matkul" required autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="jadwal-hari">Hari</label><br>
+                    <select id="jadwal-hari" name="jadwal-hari" required>
+                        <option value="">Pilih Hari</option>
+                        <option value="0">Minggu</option>
+                        <option value="1">Senin</option>
+                        <option value="2">Selasa</option>
+                        <option value="3">Rabu</option>
+                        <option value="4">Kamis</option>
+                        <option value="5">Jumat</option>
+                        <option value="6">Sabtu</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="jadwal-mulai">Jam Mulai</label><br>
+                    <input type="time" id="jadwal-mulai" name="jadwal-mulai" required>
+                </div>
+
+                <div>
+                    <label for="jadwal-selesai">Jam Selesai</label><br>
+                    <input type="time" id="jadwal-selesai" name="jadwal-selesai" required>
+                </div>
+
+                <div>
+                    <label for="jadwal-ruang">Ruang/Lokasi</label><br>
+                    <input type="text" id="jadwal-ruang" name="jadwal-ruang" autocomplete="off">
+                </div>
+
+                <div>
+                    <label for="jadwal-reminder">Reminder (menit sebelum)</label><br>
+                    <select id="jadwal-reminder" name="jadwal-reminder">
+                        <option value="0">Tidak ada</option>
+                        <option value="5">5 menit</option>
+                        <option value="10">10 menit</option>
+                        <option value="15" selected>15 menit</option>
+                        <option value="30">30 menit</option>
+                        <option value="60">1 jam</option>
+                    </select>
+                </div>
+
+                <button type="submit">Tambah Jadwal</button>
+            </form>
+
+            <hr>
+
+            <!-- Tampilan Mingguan -->
+            <div class="jadwal-section">
+                <h3>Jadwal Mingguan</h3>
+                <div id="weekly-view">
+                    <div class="week-col">
+                        <h4>Minggu</h4>
+                        <ul class="week-list" data-day="0"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Senin</h4>
+                        <ul class="week-list" data-day="1"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Selasa</h4>
+                        <ul class="week-list" data-day="2"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Rabu</h4>
+                        <ul class="week-list" data-day="3"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Kamis</h4>
+                        <ul class="week-list" data-day="4"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Jumat</h4>
+                        <ul class="week-list" data-day="5"></ul>
+                    </div>
+                    <div class="week-col">
+                        <h4>Sabtu</h4>
+                        <ul class="week-list" data-day="6"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Budget -->
+        <div id="tab-budget" class="tab-content">
+            <!-- Form Input Budget -->
+            <form id="formulir-budget">
+                <div>
+                    <label for="budget-jumlah">Jumlah (Rp)</label><br>
+                    <input type="number" id="budget-jumlah" name="budget-jumlah" required min="0" step="1000">
+                </div>
+
+                <div>
+                    <label for="budget-kategori">Kategori</label><br>
+                    <div class="category-row">
+                        <select id="budget-kategori" name="budget-kategori" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="makanan">🍔 Makanan</option>
+                            <option value="transport">🚗 Transport</option>
+                            <option value="pendidikan">📚 Pendidikan</option>
+                            <option value="hiburan">🎮 Hiburan</option>
+                            <option value="kesehatan">🏥 Kesehatan</option>
+                            <option value="belanja">🛒 Belanja</option>
+                            <option value="lainnya">📦 Lainnya</option>
+                            <option value="custom">➕ Kategori Baru</option>
+                        </select>
+                        <input type="text" id="custom-kategori" placeholder="Nama kategori baru" style="display: none;">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="budget-tanggal">Tanggal</label><br>
+                    <input type="date" id="budget-tanggal" name="budget-tanggal" required>
+                </div>
+
+                <div>
+                    <label for="budget-deskripsi">Deskripsi</label><br>
+                    <input type="text" id="budget-deskripsi" name="budget-deskripsi" placeholder="Contoh: Makan siang di kantin">
+                </div>
+
+                <button type="submit">Tambah Pengeluaran</button>
+            </form>
+
+            <hr>
+
+            <!-- Filter dan Ringkasan -->
+            <div class="budget-controls">
+                <div class="filter-row">
+                    <label for="filter-periode">Filter Periode:</label>
+                    <select id="filter-periode">
+                        <option value="semua">Semua</option>
+                        <option value="hari-ini">Hari Ini</option>
+                        <option value="minggu-ini">Minggu Ini</option>
+                        <option value="bulan-ini" selected>Bulan Ini</option>
+                        <option value="bulan-lalu">Bulan Lalu</option>
+                    </select>
+                </div>
+
+                <div class="filter-row">
+                    <label for="filter-kategori-budget">Filter Kategori:</label>
+                    <select id="filter-kategori-budget">
+                        <option value="semua">Semua Kategori</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Ringkasan Budget -->
+            <div class="budget-summary">
+                <div class="summary-card">
+                    <h4>💰 Total Pengeluaran</h4>
+                    <div class="summary-amount" id="total-pengeluaran">Rp 0</div>
+                </div>
+                <div class="summary-card">
+                    <h4>📊 Kategori Terbesar</h4>
+                    <div class="summary-category" id="kategori-terbesar">-</div>
+                </div>
+                <div class="summary-card">
+                    <h4>📅 Rata-rata Harian</h4>
+                    <div class="summary-average" id="rata-rata-harian">Rp 0</div>
+                </div>
+            </div>
+
+            <!-- Kategori Quick Filter -->
+            <div class="category-filters">
+                <h4>Filter Cepat:</h4>
+                <div id="category-buttons">
+                    <button class="category-filter-btn active" data-category="semua">Semua</button>
+                </div>
+            </div>
+
+            <!-- Daftar Pengeluaran -->
+            <div class="expense-list-container">
+                <h4>📋 Daftar Pengeluaran</h4>
+                <ul id="daftar-pengeluaran">
+                    <!-- List pengeluaran akan muncul di sini -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- Tab Content: Notes -->
+        <div id="tab-notes" class="tab-content">
+            <!-- Form Input Notes -->
+            <form id="formulir-notes">
+                <div>
+                    <label for="note-judul">Judul Note</label><br>
+                    <input type="text" id="note-judul" name="note-judul" required autocomplete="off" placeholder="Judul catatan...">
+                </div>
+
+                <div>
+                    <label for="note-kategori">Kategori</label><br>
+                    <div class="category-row">
+                        <select id="note-kategori" name="note-kategori" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="pribadi">👤 Pribadi</option>
+                            <option value="kuliah">🎓 Kuliah</option>
+                            <option value="project">💼 Project</option>
+                            <option value="ide">💡 Ide</option>
+                            <option value="reminder">⏰ Reminder</option>
+                            <option value="lainnya">📦 Lainnya</option>
+                            <option value="custom">➕ Kategori Baru</option>
+                        </select>
+                        <input type="text" id="custom-note-kategori" placeholder="Nama kategori baru" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="note-content-field">
+                    <label for="note-content">Isi Note</label><br>
+                    <textarea id="note-content" name="note-content" required placeholder="Tulis catatan kamu di sini..." rows="4"></textarea>
+                </div>
+
+                <button type="submit" id="note-submit-btn">Tambah Note</button>
+            </form>
+
+            <hr>
+
+            <!-- Filter Notes -->
+            <div class="notes-controls">
+                <div class="filter-row">
+                    <label for="filter-note-kategori">Filter Kategori:</label>
+                    <select id="filter-note-kategori">
+                        <option value="semua">Semua Kategori</option>
+                    </select>
+                </div>
+                <div class="filter-row">
+                    <input type="text" id="search-notes" placeholder="🔍 Cari notes..." autocomplete="off">
+                </div>
+            </div>
+
+            <!-- Notes List -->
+            <div class="notes-list-container">
+                <h4>📋 Daftar Notes</h4>
+                <div id="daftar-notes" class="notes-grid">
+                    <!-- Notes akan muncul di sini -->
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </main>
+   
+
+    <!-- JS belum digunakan -->
+    <script src="script.js"></script>
+</body>
+</html>
